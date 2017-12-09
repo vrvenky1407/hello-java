@@ -1,14 +1,17 @@
 package hello;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class GreetingController {
 
-	private GreetingTranslator greetingTranslator = new GreetingTranslator();
+    @Autowired
+	private GreetingTranslator greetingTranslator;
 
     @RequestMapping("/greeting")
     public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, 
@@ -17,6 +20,18 @@ public class GreetingController {
     	model.addAttribute("hello", greetingTranslator.sayHelloIn(lang));
         model.addAttribute("name", name);
         return "greeting";
+    }
+
+    @RequestMapping("/addgreeting")
+    @ResponseBody
+    public String addGreeting(@RequestParam(value="lang", required=true) String lang, 
+                              @RequestParam(value="greeting", required=true) String greeting) {
+        Greeting newGreeting = new Greeting(lang, greeting);
+        if (greetingTranslator.add(newGreeting) != null) {
+            return "OK";
+        } else {
+            return "Failed";
+        }
     }
 
 }

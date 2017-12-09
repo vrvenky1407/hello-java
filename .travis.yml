@@ -1,0 +1,13 @@
+language: java
+jdk: oraclejdk8
+env: 
+  - SPRING_DATASOURCE_DRIVERCLASSNAME=com.mysql.jdbc.Driver
+  - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/hello_test
+  - SPRING_DATASOURCE_USERNAME=travis
+  - SPRING_DATASOURCE_PASSWORD="" 
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS hello_test;'
