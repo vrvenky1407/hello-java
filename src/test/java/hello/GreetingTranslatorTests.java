@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * GreetingTranslatorTests
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes={Application.class})
 public class GreetingTranslatorTests {
     @Autowired
     private GreetingTranslator translator;
