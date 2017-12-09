@@ -8,9 +8,8 @@ MAINTAINER "Manuel Resinas <resinas@us.es">
 ENV PORT 8080
 
 # Copy to images tomcat path
-ADD target/hello-java-0.1.0.war /opt/webapp/
-ADD target/dependency/jetty-runner.jar /opt/webapp/
+ADD target/hello-java-0.1.0.jar /opt/webapp/
 WORKDIR /opt/webapp
 
 # Launch the server
-CMD java -jar jetty-runner.jar --port $PORT hello-java-0.1.0.war
+CMD java -jar hello-java-0.1.0.jar 
